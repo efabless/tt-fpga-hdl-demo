@@ -5,11 +5,11 @@ WOKWI_FILE := $(shell find . -type f -name 'tt_um_wokwi_*.v' -print -quit)
 WOKWI_ID := $(patsubst tt_um_wokwi_%,%,$(basename $(notdir $(WOKWI_FILE))))
 
 DEVICE = up5k
-PIN_DEF = icebreaker.pcf
+PIN_DEF = tt3_asic_sim.pcf
 PACKAGE = sg48
 
 # target freq for vga panel
-FREQ = 10
+FREQ = 20
 
 all: $(PROJECT).bin
 
