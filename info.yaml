@@ -6,7 +6,7 @@ project:
 # If using an HDL, set wokwi_id as 0 and uncomment and list your source files here. 
 # Source files must be in ./src and you must list each source file separately
   source_files:
-    - tt_um_fpga_hdl_demo.v.v
+    - tt_um_fpga_hdl_demo.v
     - decoder.v
   top_module:  "tt_um_fpga_hdl_demo"      # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
 
