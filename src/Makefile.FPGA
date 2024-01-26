@@ -1,7 +1,8 @@
 SHELL := /bin/bash # Use bash syntax
 SEED = 10
 PROJECT = wokwi
-WOKWI_FILE := $(shell find . -type f -name 'tt_um_wokwi_*.v' -print -quit)
+# WOKWI_FILE := $(shell find . -type f -name 'tt_um_wokwi_*.v' -print -quit)
+WOKWI_FILE := $(shell find . -type f -name 'tt_um_fpga_hdl_demo.v' -print -quit)
 WOKWI_ID := $(patsubst tt_um_wokwi_%,%,$(basename $(notdir $(WOKWI_FILE))))
 
 DEVICE = up5k
@@ -22,7 +23,7 @@ SOURCES = $(WOKWI_FILE) cells.v
 
 # rules for building the json
 %.json: $(SOURCES) $(LISTINGS)
-	yosys -l yosys.log -DSYNTH -p 'synth_ice40 -top tt_um_wokwi_$(WOKWI_ID) -json $(PROJECT).json' $(SOURCES)
+	yosys -l yosys.log -DSYNTH -p 'synth_ice40 -top tt_um_fpga_hdl_demo -json $(PROJECT).json' $(SOURCES)
 
 %.asc: %.json $(ICEBREAKER_PIN_DEF) 
 	nextpnr-ice40 -l nextpnr.log --pcf-allow-unconstrained --seed $(SEED) --freq $(FREQ) --package $(PACKAGE) --$(DEVICE) --asc $@ --pcf $(PIN_DEF) --json $<
