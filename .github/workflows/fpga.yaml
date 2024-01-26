@@ -44,7 +44,7 @@ jobs:
         shell: bash
         run: |
           cd src
-          sed -i '/uio_/d' tt_um_wokwi_*.v
+          # sed -i '/uio_/d' tt_um_wokwi_*.v
           make -f Makefile.FPGA
 
       - name: Upload bitstream artifact
