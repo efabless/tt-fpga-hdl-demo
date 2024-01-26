@@ -30,10 +30,6 @@ jobs:
         shell: bash
         run: pip install -r tt/requirements.txt
 
-      - name: Fetch verilog and build config
-        shell: bash
-        run: ./tt/tt_tool.py --create-user-config
-
         # install oss fpga tools
       - name: install oss-cad-suite
         uses: YosysHQ/setup-oss-cad-suite@v2
