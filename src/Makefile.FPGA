@@ -2,8 +2,8 @@ SHELL := /bin/bash # Use bash syntax
 SEED = 10
 PROJECT = wokwi
 # WOKWI_FILE := $(shell find . -type f -name 'tt_um_wokwi_*.v' -print -quit)
-WOKWI_FILE := $(shell find . -type f -name 'tt_um_fpga_hdl_demo.v' -print -quit)
-WOKWI_ID := $(patsubst tt_um_wokwi_%,%,$(basename $(notdir $(WOKWI_FILE))))
+# WOKWI_FILE := $(shell find . -type f -name 'tt_um_fpga_hdl_demo.v' -print -quit)
+# WOKWI_ID := $(patsubst tt_um_wokwi_%,%,$(basename $(notdir $(WOKWI_FILE))))
 
 DEVICE = up5k
 PIN_DEF = tt3_asic_sim.pcf
@@ -15,7 +15,7 @@ FREQ = 20
 all: $(PROJECT).bin
 
 BUILD_DIR = ./
-SOURCES = $(WOKWI_FILE) cells.v
+SOURCES = tt_um_fpga_hdl_demo.v cells.v decoder.v
 
 # $@ The file name of the target of the rule.rule
 # $< first pre requisite
