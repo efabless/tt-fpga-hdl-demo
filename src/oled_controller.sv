@@ -15,7 +15,7 @@ module oled_controller(
 
 // Parameters
 parameter BUFFER_SIZE = 16; // Buffer size for SPI commands
-parameter CLK_FREQ = 50_000_000; // System clock frequency
+parameter CLK_FREQ = 20_000_000; // System clock frequency
 parameter DELAY_100MS = CLK_FREQ / 10; // 100ms delay at system clock
 parameter SPI_CLK_DIV = 4; // Divider for generating SPI clock from system clock
 
