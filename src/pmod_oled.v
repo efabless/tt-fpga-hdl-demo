@@ -16,28 +16,21 @@ module PmodOLED_PowerOn(
     parameter BYTE_SEQ = {8'hA5, 8'h5A, 8'h3C, 8'hC3}; // Example byte sequence
 
     // State definition
-    localparam IDLE = 2'b00,
-               SEND_BYTE = 2'b01,
-               WAIT_DONE = 2'b10,
-               NOT_USED = 2'b11;
+    localparam RESET_OLED       = 3'd0,
+               INIT_START       = 3'd1,
+               DISPLAY_OFF      = 3'd2,
+               SET_CHARGE_PUMP  = 3'd3,
+               SET_SEG_REMAP    = 3'd4,
+               // Add more states based on your display's initialization sequence
+               DISPLAY_CLEAR    = 3'd5,
+               DISPLAY_ON       = 3'd6,
+               INIT_DONE        = 3'd7;
 
     // SPI Master instantiation
     reg start_spi;
     reg [7:0] data_to_send;
     wire [7:0] data_received;
     wire done_spi;
-
-    typedef enum reg [3:0] {
-        RESET_OLED,
-        INIT_START,
-        DISPLAY_OFF,
-        SET_CHARGE_PUMP,
-        SET_SEG_REMAP,
-        // Add more states based on your display's initialization sequence
-        DISPLAY_CLEAR,
-        DISPLAY_ON,
-        INIT_DONE
-    } state_type;
 
     reg [3:0] current_state, next_state;
 
