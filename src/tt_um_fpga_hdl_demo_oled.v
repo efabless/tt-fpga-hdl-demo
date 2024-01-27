@@ -10,13 +10,15 @@ module tt_um_fpga_hdl_demo_oled (
 
     assign uo_out[2] = 1'b1;
 
-    PmodOLED_PowerOn oled (
+    oled_controller oled (
         .clk(clk),
-        .rst_n(rst_n),
-        .oled_cs(uo_out[0]),
-        .oled_sclk(uo_out[3]),
-        .oled_sdin(uo_out[1]),
-        .oled_sdout(ui_in[0]),
+        .reset(~rst_n),
+        .data_in(),
+        .write_enable(),
+        .buffer_full(),
+        .spi_cs(uo_out[0]),
+        .spi_clk(uo_out[3]),
+        .spi_mosi(uo_out[1]),
         .oled_dc(uo_out[4]),
         .oled_res(uo_out[5]),
         .oled_vbat(uo_out[6]),
