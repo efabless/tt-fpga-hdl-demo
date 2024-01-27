@@ -68,7 +68,8 @@ module tt_um_fpga_hdl_demo_oled (
                 STATE_SEND_H: begin
                     data_to_send <= H;
                     write_enable <= 1'b1;
-                    state <= STATE_SEND_E;
+                    state <= STATE_DELAY;
+                    // state <= STATE_SEND_E;
                 end
                 STATE_SEND_E: begin
                     data_to_send <= E;
