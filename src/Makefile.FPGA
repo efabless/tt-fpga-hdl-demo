@@ -16,7 +16,7 @@ FREQ = 20
 all: $(PROJECT).bin
 
 BUILD_DIR = ./
-SOURCES = tt_um_fpga_hdl_demo.v cells.v decoder.v
+SOURCES = tt_um_fpga_hdl_demo.v cells.v decoder.v spi_master.v
 
 # $@ The file name of the target of the rule.rule
 # $< first pre requisite
