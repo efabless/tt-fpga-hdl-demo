@@ -18,7 +18,7 @@ module tt_um_fpga_hdl_demo (
     // State definition
     localparam IDLE = 2'b00,
                SEND_BYTE = 2'b01,
-               WAIT_DONE = 2'b10;
+               WAIT_DONE = 2'b10,
                NOT_USED = 2'b11;
 
     // SPI Master instantiation
