@@ -36,7 +36,7 @@ module tt_um_fpga_hdl_demo_w_spi (
         .done(done_spi),
         .sclk(uo_out[3]),
         .mosi(uo_out[1]),
-        .miso(uo_in[0]),
+        .miso(ui_in[0]),
         .cs(uo_out[0])
     );
 
