@@ -18,7 +18,8 @@ FREQ = 20
 all: $(PROJECT).bin
 
 BUILD_DIR = ./
-SOURCES = $(TOPCELL).v cells.v decoder.v spi_master.v oled_controller.sv
+SOURCES = $(TOPCELL).v oled_controller.sv
+# SOURCES = $(TOPCELL).v cells.v decoder.v spi_master.v oled_controller.sv
 
 # $@ The file name of the target of the rule.rule
 # $< first pre requisite
