@@ -6,7 +6,8 @@ PROJECT = wokwi
 # WOKWI_ID := $(patsubst tt_um_wokwi_%,%,$(basename $(notdir $(WOKWI_FILE))))
 
 DEVICE = up5k
-PIN_DEF = tt3_asic_sim.pcf
+# PIN_DEF = tt3_asic_sim.pcf
+PIN_DEF = tt3_asic_sim_spi_out.pcf
 PACKAGE = sg48
 
 # target freq for vga panel
