@@ -126,15 +126,4 @@ module PmodOLED_PowerOn(
         end
     endtask
 
-    reg [3:0] byte_index; // Counter for the bytes in the sequence
-
-    always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            byte_index <= 0;
-        end else if (byte_index < NUM_BYTES) begin
-            send_byte(BYTE_SEQ[8*byte_index +: 8]); // Call task to send next byte
-            byte_index <= byte_index + 1;
-        end
-    end
-
 endmodule
