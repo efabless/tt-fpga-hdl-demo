@@ -1,56 +1,68 @@
-module spi_master(
-    input clk,
-    input rst,
-    input en,
-    output sclk,
-    output mosi,
-    input miso,
-    output cs,
-    input [7:0] data_in,
-    output reg [7:0] data_out
+module spi_master (
+    input wire clk,          // System clock
+    input wire rst_n,        // Active low reset
+    input wire start,        // Start transfer signal
+    input wire [7:0] data_in, // Data to send to the slave
+    output reg [7:0] data_out, // Data received from the slave
+    output reg done,         // Transfer complete signal
+    output wire sclk,        // SPI clock
+    output reg mosi,         // Master Out Slave In
+    input wire miso,         // Master In Slave Out
+    output reg cs            // Chip Select
 );
 
-    reg [3:0] count = 0;
-    reg [7:0] shift_reg = 0;
-    reg state = 0;
+// State definition
+localparam IDLE = 2'b00,
+           TRANSFER = 2'b01,
+           DONE = 2'b10;
 
-    always @(posedge clk or posedge rst) begin
-        if (rst) begin
-            count <= 0;
-            shift_reg <= 0;
-            state <= 0;
-            data_out <= 0;
-        end else if (en) begin
-            case (state)
-                0: begin  // Idle state
-                    cs <= 1;
-                    if (count == 0) begin
-                        count <= 7;
-                        shift_reg <= data_in;
-                        state <= 1;
-                        cs <= 0;
-                    end else begin
-                        count <= count - 1;
-                    end
-                end
-                1: begin  // Shift data out
-                    sclk <= 0;
-                    shift_reg <= {shift_reg[6:0], 1'b0};
-                    state <= 2;
-                end
-                2: begin  // Sample data in
-                    sclk <= 1;
-                    data_out <= {data_out[6:0], miso};
-                    if (count == 0) begin
-                        state <= 0;
-                    end else begin
-                        count <= count - 1;
-                    end
-                end
-            endcase
-        end
+// SPI clock generation
+reg [7:0] clk_div;
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) clk_div <= 0;
+    else clk_div <= clk_div + 1;
+end
+assign sclk = clk_div[7]; // Generate SPI clock, adjust divisor as needed
+
+// SPI controller state machine
+reg [1:0] state;
+reg [2:0] bit_count; // To track the bits transferred
+
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        state <= IDLE;
+        cs <= 1'b1; // Deactivate slave
+        done <= 1'b0;
+        bit_count <= 0;
     end
-
-    assign mosi = shift_reg[7];
+    else begin
+        case (state)
+            IDLE: begin
+                if (start) begin
+                    cs <= 1'b0; // Activate slave
+                    state <= TRANSFER;
+                    bit_count <= 0;
+                    done <= 1'b0;
+                end
+            end
+            TRANSFER: begin
+                if (clk_div == 8'd255) begin // SPI clock edge
+                    mosi <= data_in[7 - bit_count]; // Send MSB first
+                    if (bit_count != 7) begin
+                        bit_count <= bit_count + 1;
+                        data_out <= {data_out[6:0], miso}; // Shift in MISO
+                    end else begin
+                        state <= DONE;
+                    end
+                end
+            end
+            DONE: begin
+                done <= 1'b1;
+                cs <= 1'b1; // Deactivate slave
+                state <= IDLE;
+            end
+        endcase
+    end
+end
 
 endmodule
