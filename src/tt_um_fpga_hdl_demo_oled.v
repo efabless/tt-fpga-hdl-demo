@@ -94,9 +94,9 @@ module tt_um_fpga_hdl_demo_oled (
                     // Finish sending, hold in done state
                     write_enable <= 1'b0;
                 end
-                default: state <= STATE_IDLE;
+                default: state <= STATE_DELAY;
             endcase
-            if (state != STATE_IDLE) begin
+            if (state != STATE_DELAY) begin
                 // Ensure write_enable is only asserted for one cycle
                 write_enable <= 1'b0;
             end
