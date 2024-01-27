@@ -1,6 +1,6 @@
 `default_nettype none
 
-module tt_um_fpga_hdl_demo (
+module tt_um_fpga_hdl_demo_w_spi (
     input  wire [7:0] ui_in,    // Dedicated inputs - connected to the input switches
     output wire [7:0] uo_out,   // Dedicated outputs - connected to the 7 segment display
     input  wire       ena,      // will go high when the design is enabled
