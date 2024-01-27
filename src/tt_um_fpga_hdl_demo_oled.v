@@ -13,8 +13,8 @@ module tt_um_fpga_hdl_demo_oled (
     oled_controller oled (
         .clk(clk),
         .reset(~rst_n),
-        .data_in(),
-        .write_enable(),
+        .data_in(data_to_send),
+        .write_enable(write_enable),
         .buffer_full(),
         .spi_cs(uo_out[0]),
         .spi_clk(uo_out[3]),
