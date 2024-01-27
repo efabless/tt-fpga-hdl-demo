@@ -8,8 +8,11 @@ module tt_um_fpga_hdl_demo_w_spi (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-    assign uo_out[7:4] = 4'b0;
-    assign uo_out[2] = 1'b0;
+    assign uo_out[4] = 1'b1;
+    assign uo_out[5] = 1'b0;
+    assign uo_out[6] = 1'b1;
+    assign uo_out[7] = 1'b1;
+    assign uo_out[2] = 1'b1;
 
     // Parameters
     parameter NUM_BYTES = 4; // Number of bytes to send
