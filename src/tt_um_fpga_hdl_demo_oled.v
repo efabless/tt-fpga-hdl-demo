@@ -45,7 +45,7 @@ module tt_um_fpga_hdl_demo_oled (
                STATE_DONE = 6;
 
     always @(posedge clk or negedge rst_n) begin
-        if (rst_n) begin
+        if (~rst_n) begin
             state <= STATE_IDLE;
             data_to_send <= 8'd0;
             write_enable <= 1'b0;
