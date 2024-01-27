@@ -44,7 +44,7 @@ module tt_um_fpga_hdl_demo_oled (
                STATE_SEND_O = 5,
                STATE_DONE = 6;
 
-    always @(posedge clk or posedge reset) begin
+    always @(posedge clk or negedge rst_n) begin
         if (reset) begin
             state <= STATE_IDLE;
             data_to_send <= 8'd0;
