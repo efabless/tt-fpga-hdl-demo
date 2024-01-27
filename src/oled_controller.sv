@@ -142,6 +142,9 @@ always @(posedge clk) begin
         S_POWER_ON_VBAT: begin
             oled_vbat <= 1;  // power display
         end
+        S_DONE: begin
+            oled_dc <= 0;  // data mode
+        end
     endcase
     // Additional state actions for power control and delays
 end

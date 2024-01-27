@@ -25,9 +25,15 @@ module tt_um_fpga_hdl_demo_oled (
         .oled_vdd(uo_out[7])
     );
 
+    // Parameters
+    parameter CLK_FREQ = 20_000_000; // System clock frequency
+    parameter DELAY_500MS = CLK_FREQ / 2; // Number of clock cycles for 500ms delay
+
+
     reg [7:0] data_to_send;
     reg write_enable;
     reg [3:0] state; // Simple state machine for sending "hello"
+    reg [31:0] delay_counter; // Counter for the initial delay
 
     // ASCII values for "hello"
     localparam H = 8'h68;
@@ -36,7 +42,7 @@ module tt_um_fpga_hdl_demo_oled (
     localparam O = 8'h6F;
 
     // State definitions
-    localparam STATE_IDLE = 0,
+    localparam STATE_DELAY = 0,
                STATE_SEND_H = 1,
                STATE_SEND_E = 2,
                STATE_SEND_L1 = 3,
@@ -46,14 +52,18 @@ module tt_um_fpga_hdl_demo_oled (
 
     always @(posedge clk or negedge rst_n) begin
         if (~rst_n) begin
-            state <= STATE_IDLE;
+            state <= STATE_DELAY;
             data_to_send <= 8'd0;
             write_enable <= 1'b0;
+            delay_counter <= 0;
         end else begin
             case (state)
-                STATE_IDLE: begin
-                    // Start sending "hello"
-                    state <= STATE_SEND_H;
+                STATE_DELAY: begin
+                    if (delay_counter < DELAY_500MS) begin
+                        delay_counter <= delay_counter + 1;
+                    end else begin
+                        state <= STATE_SEND_H; // Move to next state after delay
+                    end
                 end
                 STATE_SEND_H: begin
                     data_to_send <= H;
