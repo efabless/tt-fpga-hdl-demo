@@ -25,4 +25,72 @@ module tt_um_fpga_hdl_demo_oled (
         .oled_vdd(uo_out[7])
     );
 
+    reg [7:0] data_to_send;
+    reg write_enable;
+    reg [3:0] state; // Simple state machine for sending "hello"
+
+    // ASCII values for "hello"
+    localparam H = 8'h68;
+    localparam E = 8'h65;
+    localparam L = 8'h6C;
+    localparam O = 8'h6F;
+
+    // State definitions
+    localparam STATE_IDLE = 0,
+               STATE_SEND_H = 1,
+               STATE_SEND_E = 2,
+               STATE_SEND_L1 = 3,
+               STATE_SEND_L2 = 4,
+               STATE_SEND_O = 5,
+               STATE_DONE = 6;
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            state <= STATE_IDLE;
+            data_to_send <= 8'd0;
+            write_enable <= 1'b0;
+        end else begin
+            case (state)
+                STATE_IDLE: begin
+                    // Start sending "hello"
+                    state <= STATE_SEND_H;
+                end
+                STATE_SEND_H: begin
+                    data_to_send <= H;
+                    write_enable <= 1'b1;
+                    state <= STATE_SEND_E;
+                end
+                STATE_SEND_E: begin
+                    data_to_send <= E;
+                    write_enable <= 1'b1; // Assert write_enable briefly
+                    state <= STATE_SEND_L1;
+                end
+                STATE_SEND_L1: begin
+                    data_to_send <= L;
+                    write_enable <= 1'b1;
+                    state <= STATE_SEND_L2;
+                end
+                STATE_SEND_L2: begin
+                    data_to_send <= L;
+                    write_enable <= 1'b1;
+                    state <= STATE_SEND_O;
+                end
+                STATE_SEND_O: begin
+                    data_to_send <= O;
+                    write_enable <= 1'b1;
+                    state <= STATE_DONE;
+                end
+                STATE_DONE: begin
+                    // Finish sending, hold in done state
+                    write_enable <= 1'b0;
+                end
+                default: state <= STATE_IDLE;
+            endcase
+            if (state != STATE_IDLE) begin
+                // Ensure write_enable is only asserted for one cycle
+                write_enable <= 1'b0;
+            end
+        end
+    end
+
 endmodule
