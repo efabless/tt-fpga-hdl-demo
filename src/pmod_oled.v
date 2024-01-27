@@ -41,7 +41,7 @@ module PmodOLED_PowerOn(
             current_state <= next_state;
     end
 
-    always @(*) begin
+    always @(posedge clk) begin
         case (current_state)
             RESET_OLED: begin
                 oled_res = 0; // Assert reset
@@ -108,9 +108,9 @@ module PmodOLED_PowerOn(
 
     // Task for sending a byte
     task send_byte;
-        input [7:0] byte;
+        input [7:0] data;
         begin
-            data_to_send <= byte;
+            data_to_send <= data;
             start_spi <= 1'b1;
             @(posedge clk);
             start_spi <= 1'b0;
