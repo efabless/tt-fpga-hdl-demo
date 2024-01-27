@@ -56,8 +56,10 @@ always @(posedge clk or posedge reset) begin
         spi_clk_en <= 0;
         bit_count <= 0;
         command_enqueued <= 0;
-        vdd <= 0;
-        vbat <= 0;
+        oled_vdd <= 0;
+        oled_vbat <= 0;
+        oled_dc <= 0;
+        oled_res <= 0;
         current_state <= S_IDLE;
         delay_counter <= 0;
     end else begin
@@ -117,15 +119,30 @@ end
 
 // Command Enqueueing and Additional State Actions
 always @(posedge clk) begin
-    if (current_state == S_SEND_DISPLAY_OFF && !command_enqueued && !buffer_full) begin
-        spi_data_buffer[write_ptr] <= 8'hAE; // Display Off command
-        write_ptr <= (write_ptr + 1) % BUFFER_SIZE;
-        command_enqueued <= 1;
-    end else if (current_state == S_SEND_DISPLAY_ON && !command_enqueued && !buffer_full) begin
-        spi_data_buffer[write_ptr] <= 8'hAF; // Display On command
-        write_ptr <= (write_ptr + 1) % BUFFER_SIZE;
-        command_enqueued <= 1;
-    end
+    case (current_state)
+        S_SEND_DISPLAY_OFF: begin
+                if (!command_enqueued && !buffer_full) begin
+                    spi_data_buffer[write_ptr] <= 8'hAE; // Display Off command
+                    write_ptr <= (write_ptr + 1) % BUFFER_SIZE;
+                    command_enqueued <= 1;
+                end
+            end
+        S_SEND_DISPLAY_ON: begin
+                if (!command_enqueued && !buffer_full) begin
+                    spi_data_buffer[write_ptr] <= 8'hAF; // Display On command
+                    write_ptr <= (write_ptr + 1) % BUFFER_SIZE;
+                    command_enqueued <= 1;
+                end
+            end
+        S_POWER_ON_VDD: begin
+            oled_vdd <= 1;  // power logic
+            oled_dc <= 1;  // command mode
+            oled_res <= 0; // release reset
+        end
+        S_POWER_ON_VBAT: begin
+            oled_vbat <= 1;  // power display
+        end
+    endcase
     // Additional state actions for power control and delays
 end
 
