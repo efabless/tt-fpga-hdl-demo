@@ -5,6 +5,7 @@ PROJECT = wokwi
 # WOKWI_FILE := $(shell find . -type f -name 'tt_um_fpga_hdl_demo.v' -print -quit)
 # WOKWI_ID := $(patsubst tt_um_wokwi_%,%,$(basename $(notdir $(WOKWI_FILE))))
 
+TOPCELL = tt_um_fpga_hdl_demo_w_spi
 DEVICE = up5k
 # PIN_DEF = tt3_asic_sim.pcf
 PIN_DEF = tt3_asic_sim_spi_out.pcf
@@ -16,7 +17,7 @@ FREQ = 20
 all: $(PROJECT).bin
 
 BUILD_DIR = ./
-SOURCES = tt_um_fpga_hdl_demo.v cells.v decoder.v spi_master.v
+SOURCES = $(TOPCELL).v cells.v decoder.v spi_master.v
 
 # $@ The file name of the target of the rule.rule
 # $< first pre requisite
@@ -24,7 +25,7 @@ SOURCES = tt_um_fpga_hdl_demo.v cells.v decoder.v spi_master.v
 
 # rules for building the json
 %.json: $(SOURCES) $(LISTINGS)
-	yosys -l yosys.log -DSYNTH -p 'synth_ice40 -top tt_um_fpga_hdl_demo -json $(PROJECT).json' $(SOURCES)
+	yosys -l yosys.log -DSYNTH -p 'synth_ice40 -top $(TOPCELL) -json $(PROJECT).json' $(SOURCES)
 
 %.asc: %.json $(ICEBREAKER_PIN_DEF) 
 	nextpnr-ice40 -l nextpnr.log --pcf-allow-unconstrained --seed $(SEED) --freq $(FREQ) --package $(PACKAGE) --$(DEVICE) --asc $@ --pcf $(PIN_DEF) --json $<
