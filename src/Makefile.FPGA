@@ -5,12 +5,16 @@ PROJECT = wokwi
 # WOKWI_FILE := $(shell find . -type f -name 'tt_um_fpga_hdl_demo.v' -print -quit)
 # WOKWI_ID := $(patsubst tt_um_wokwi_%,%,$(basename $(notdir $(WOKWI_FILE))))
 
-# TOPCELL = tt_um_fpga_hdl_demo
-# PIN_DEF = tt3_asic_sim.pcf
 
-TOPCELL = tt_um_fpga_hdl_demo_oled
+TOPCELL = tt_um_fpga_hdl_demo
+PIN_DEF = tt3_asic_sim.pcf
+SOURCES = $(TOPCELL).v cells.v decoder.v spi_master.v oled_controller.sv
+
+# TOPCELL = tt_um_fpga_hdl_demo_oled
+# PIN_DEF = tt3_asic_sim_spi_out.pcf
+# SOURCES = $(TOPCELL).v oled_controller.sv
+
 DEVICE = up5k
-PIN_DEF = tt3_asic_sim_spi_out.pcf
 PACKAGE = sg48
 
 # target freq for vga panel
@@ -19,8 +23,7 @@ FREQ = 20
 all: $(PROJECT).bin
 
 BUILD_DIR = ./
-SOURCES = $(TOPCELL).v oled_controller.sv
-# SOURCES = $(TOPCELL).v cells.v decoder.v spi_master.v oled_controller.sv
+
 
 # $@ The file name of the target of the rule.rule
 # $< first pre requisite
