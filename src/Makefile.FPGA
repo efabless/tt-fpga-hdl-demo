@@ -9,13 +9,9 @@ PROJECT = wokwi
 #PIN_DEF = tt3_asic_sim.pcf
 #SOURCES = $(TOPCELL).v decoder.v
 
-TOPCELL = tt_um_fpga_calculator
+TOPCELL = tt_um_template
 PIN_DEF = tt3_asic_sim.pcf
-SOURCES = $(TOPCELL).sv
-
-# TOPCELL = tt_um_fpga_hdl_demo_oled
-# PIN_DEF = tt3_asic_sim_spi_out.pcf
-# SOURCES = $(TOPCELL).v oled_controller.sv
+SOURCES = top.sv
 
 DEVICE = up5k
 PACKAGE = sg48
