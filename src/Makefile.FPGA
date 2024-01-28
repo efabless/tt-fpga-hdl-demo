@@ -5,9 +5,9 @@ PROJECT = wokwi
 # WOKWI_FILE := $(shell find . -type f -name 'tt_um_fpga_hdl_demo.v' -print -quit)
 # WOKWI_ID := $(patsubst tt_um_wokwi_%,%,$(basename $(notdir $(WOKWI_FILE))))
 
-TOPCELL = tt_um_fpga_hdl_demo
-PIN_DEF = tt3_asic_sim.pcf
-SOURCES = $(TOPCELL).v decoder.v
+#TOPCELL = tt_um_fpga_hdl_demo
+#PIN_DEF = tt3_asic_sim.pcf
+#SOURCES = $(TOPCELL).v decoder.v
 
 TOPCELL = tt_um_fpga_calculator
 PIN_DEF = tt3_asic_sim.pcf
