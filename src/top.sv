@@ -84,23 +84,20 @@ endmodule
 module tt_um_template (
     input  wire [7:0] ui_in,    // Dedicated inputs - connected to the input switches
     output wire [7:0] uo_out,   // Dedicated outputs - connected to the 7 segment display
-    input  wire [7:0] uio_in,   // IOs: Bidirectional Input path
-    output wire [7:0] uio_out,  // IOs: Bidirectional Output path
-    output wire [7:0] uio_oe,   // IOs: Bidirectional Enable path (active high: 0=input, 1=output)
     input  wire       ena,      // will go high when the design is enabled
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
     // Synchronize.
-    logic [17:0] inputs_ff, inputs_sync;
+    logic [9:0] inputs_ff, inputs_sync;
     always @(posedge clk) begin
-        inputs_ff <= {ui_in, uio_in, ena, rst_n};
+        inputs_ff <= {ui_in, ena, rst_n};
         inputs_sync <= inputs_ff;
     end
 
     // Debounce.
     `define DEBOUNCE_MAX_CNT 8'hff
-    logic [17:0] inputs_candidate, inputs_captured;
+    logic [9:0] inputs_candidate, inputs_captured;
     logic sync_rst_n = inputs_sync[0];
     logic [7:0] cnt;
     always @(posedge clk) begin
@@ -118,13 +115,12 @@ module tt_um_template (
            inputs_captured <= inputs_candidate;
         end
     end
-    logic [7:0] clean_ui_in, clean_uio_in;
+    logic [7:0] clean_ui_in;
     logic clean_ena, clean_rst_n;
-    assign {clean_ui_in, clean_uio_in, clean_ena, clean_rst_n} = inputs_captured;
+    assign {clean_ui_in, clean_ena, clean_rst_n} = inputs_captured;
 
     my_design my_design (
         .ui_in(clean_ui_in),
-        .uio_in(clean_uio_in),
         .ena(clean_ena),
         .rst_n(clean_rst_n),
         .*);
