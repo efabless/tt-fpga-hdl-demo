@@ -8,7 +8,7 @@ PROJECT = wokwi
 
 TOPCELL = tt_um_fpga_hdl_demo
 PIN_DEF = tt3_asic_sim.pcf
-SOURCES = $(TOPCELL).v cells.v decoder.v spi_master.v oled_controller.sv
+SOURCES = $(TOPCELL).v decoder.v
 
 # TOPCELL = tt_um_fpga_hdl_demo_oled
 # PIN_DEF = tt3_asic_sim_spi_out.pcf
