@@ -444,8 +444,7 @@ logic FpgaPins_Fpga_CALC_valid_a1,
                      
                      //_@3
                         assign FpgaPins_Fpga_CALC_digit_a3[3:0] = FpgaPins_Fpga_CALC_out_a3[3:0];
-                        assign uo_out[7:0] = ~uo_out_temp[7:0];
-                        logic uo_out_temp[7:0];
+                        logic [7:0] uo_out_temp;
                         assign uo_out_temp =
                            FpgaPins_Fpga_CALC_digit_a3 == 4'h0 ? 8'b11000000 :
                            FpgaPins_Fpga_CALC_digit_a3 == 4'h1 ? 8'b11111001 :
@@ -463,7 +462,8 @@ logic FpgaPins_Fpga_CALC_valid_a1,
                            FpgaPins_Fpga_CALC_digit_a3 == 4'hD ? 8'b10100001 :
                            FpgaPins_Fpga_CALC_digit_a3 == 4'hE ? 8'b10000110 :
                                             8'b10001110;
-                     
+                        assign uo_out[7:0] = ~uo_out_temp[7:0];
+
                         
                      
                   
