@@ -415,7 +415,7 @@ logic FpgaPins_Fpga_CALC_valid_a1,
                            assign FpgaPins_Fpga_CALC_sum_a1[7:0] = FpgaPins_Fpga_CALC_val1_a1 + FpgaPins_Fpga_CALC_val2_a1;
                            assign FpgaPins_Fpga_CALC_diff_a1[7:0] = FpgaPins_Fpga_CALC_val1_a1 - FpgaPins_Fpga_CALC_val2_a1;
                            assign FpgaPins_Fpga_CALC_prod_a1[7:0] = FpgaPins_Fpga_CALC_val1_a1 * FpgaPins_Fpga_CALC_val2_a1;
-                           assign FpgaPins_Fpga_CALC_quot_a1[7:0] = FpgaPins_Fpga_CALC_val1_a1 + FpgaPins_Fpga_CALC_val2_a1;
+                           assign FpgaPins_Fpga_CALC_quot_a1[7:0] = FpgaPins_Fpga_CALC_val1_a1 / FpgaPins_Fpga_CALC_val2_a1;
                         //_@2
                            
                            assign FpgaPins_Fpga_CALC_mem_a2[7:0] = FpgaPins_Fpga_CALC_reset_a2               ? 8'b0 :

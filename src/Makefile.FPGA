@@ -17,7 +17,7 @@ DEVICE = up5k
 PACKAGE = sg48
 
 # target freq for vga panel
-FREQ = 20
+FREQ = 10
 
 all: $(PROJECT).bin
 
