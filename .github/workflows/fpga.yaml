@@ -48,5 +48,5 @@ jobs:
         with:
           name: bitstream
           path: |
-            src/wokwi.bin
+            src/bitstream.bin
             src/tt_um_wokwi_*.v

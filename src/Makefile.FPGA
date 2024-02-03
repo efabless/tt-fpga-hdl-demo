@@ -1,13 +1,6 @@
 SHELL := /bin/bash # Use bash syntax
 SEED = 10
-PROJECT = wokwi
-# WOKWI_FILE := $(shell find . -type f -name 'tt_um_wokwi_*.v' -print -quit)
-# WOKWI_FILE := $(shell find . -type f -name 'tt_um_fpga_hdl_demo.v' -print -quit)
-# WOKWI_ID := $(patsubst tt_um_wokwi_%,%,$(basename $(notdir $(WOKWI_FILE))))
-
-#TOPCELL = tt_um_fpga_hdl_demo
-#PIN_DEF = tt3_asic_sim.pcf
-#SOURCES = $(TOPCELL).v decoder.v
+PROJECT = bitstream
 
 TOPCELL = tt_um_template
 PIN_DEF = tt3_asic_sim.pcf
@@ -22,7 +15,6 @@ FREQ = 10
 all: $(PROJECT).bin
 
 BUILD_DIR = ./
-
 
 # $@ The file name of the target of the rule.rule
 # $< first pre requisite
