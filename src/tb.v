@@ -32,7 +32,7 @@ module tb (
             .vssd1( 1'b0),
         `endif
         .ui_in  (inputs),
-        .uo_out (outputs)
+        .uo_out (outputs),
         .clk (clk),
         .rst_n (~rst)
         );
