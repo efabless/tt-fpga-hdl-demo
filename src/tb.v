@@ -21,18 +21,20 @@ module tb (
     end
 
     // wire up the inputs and outputs
-    wire [7:0] inputs = {6'b0, rst, clk};
+    wire [7:0] inputs = {8'b0};
     wire [7:0] outputs;
     assign segments = outputs[6:0];
 
     // instantiate the DUT
-    seven_segment_seconds seven_segment_seconds(
+    tt_um_template dut(
         `ifdef GL_TEST
             .vccd1( 1'b1),
             .vssd1( 1'b0),
         `endif
-        .io_in  (inputs),
-        .io_out (outputs)
+        .ui_in  (inputs),
+        .uo_out (outputs)
+        .clk (clk),
+        .rst_n (~rst)
         );
 
 endmodule
