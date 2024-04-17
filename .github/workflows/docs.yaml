@@ -13,5 +13,11 @@ jobs:
         with:
           submodules: recursive
 
+      # Build Verilog if necessary from, e.g. TL-Verilog (to satisfy Verilog existence check).
+      - name: Build Verilog
+        run: |
+          cd test
+          make verilog
+
       - name: Build docs
-        uses: TinyTapeout/tt-gds-action/docs@tt05
+        uses: TinyTapeout/tt-gds-action/docs@tt06

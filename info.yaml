@@ -1,75 +1,58 @@
---- 
 # Tiny Tapeout project information
 project:
-  wokwi_id:    0        # If using wokwi, set this to your project's ID
 
-# If using an HDL, set wokwi_id as 0 and uncomment and list your source files here. 
-# Source files must be in ./src and you must list each source file separately
-  source_files:
-    - top.sv
-  top_module:  "tt_um_template"      # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
+  # If using an HDL, set wokwi_id as 0 and uncomment and list your source files here. 
+  wokwi_id:     111111111111111111        # If using wokwi, set this to your project's ID
+  
+  title:        "TBD"      # Project title
+  author:       "TBD"      # Your name
+  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "TBD"      # One line description of what your project does
+  language:     "Verilog" # other examples include SystemVerilog, TL-Verilog, Amaranth, VHDL, etc
+  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
-# How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "1x1"    # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2 or 8x2
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
-# Keep a track of the submission yaml
-yaml_version: 4
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_example"
+  
+  # List your project's Verilog source files here. (For TL-Verilog (.tlv) sources, list the corresponding (.v) generated Verilog files (which should not be committed to the repo).)
+  # Verilog/TL-Verilog source files must be in ./src and you must list each Verilog source file separately, one per line:
+  source_files:        
+    - "project.v"
 
-# As everyone will have access to all designs, try to make it easy for someone new to your design to know what
-# it does and how to operate it. This info will be automatically collected and used to make a datasheet for the chip.
-#
-# Here is a great example: https://github.com/davidsiaw/tt02-davidsiaw-stackcalc/blob/38c5647f83aad2aec675d566aa3d67b98f0aac81/info.yaml
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+pinout:
+  # Inputs
+  ui[0]: ""
+  ui[1]: ""
+  ui[2]: ""
+  ui[3]: ""
+  ui[4]: ""
+  ui[5]: ""
+  ui[6]: ""
+  ui[7]: ""
 
-documentation:
-  author:       "Your name here"                 # Your name
-  title:        "Verilog FPGA bitstream"           # Project title
-  language:     "Verilog"                          # other examples include Verilog, Amaranth, VHDL, etc
-  description:  "The project generates an FPGA bitstream for a Verilog based Tiny Tapeout design."      # Short description of what your project does
+  # Outputs
+  uo[0]: ""
+  uo[1]: ""
+  uo[2]: ""
+  uo[3]: ""
+  uo[4]: ""
+  uo[5]: ""
+  uo[6]: ""
+  uo[7]: ""
 
+  # Bidirectional pins
+  uio[0]: ""
+  uio[1]: ""
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
 
-# Longer description of how the project works. You can use standard markdown format.
-  how_it_works: |
-      Explain how your project works
-
-# Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
-  how_to_test:  |
-      Explain how to test your project
-
-# A description of what the inputs do (e.g. red button, SPI CLK, SPI MOSI, etc).
-  inputs:               
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-# A description of what the outputs do (e.g. status LED, SPI MISO, etc)
-  outputs:
-    - segment a
-    - segment b
-    - segment c
-    - segment d
-    - segment e
-    - segment f
-    - segment g
-    - dot
-# A description of what the bidirectional I/O pins do (e.g. I2C SDA, I2C SCL, etc)
-  bidirectional:
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-
-# The following fields are optional
-  tag:          ""      # comma separated list of tags: test, encryption, experiment, clock, animation, utility, industrial, pwm, fpga, alu, microprocessor, risc, riscv, sensor, signal generator, fft, filter, music, bcd, sound, serial, timer, random number generator, calculator, decoder, counter, puzzle, multiplier, game, oscillator,
-  external_hw:  ""      # Describe any external hardware needed
-  discord:      ""      # Your discord handle, used for communication and automatically assigning tapeout role after a submission
-  doc_link:     ""      # URL to longer form documentation, eg the README.md in your repository
-  clock_hz:     0       # Clock frequency in Hz (if required)
-  picture:      ""      # relative path to a picture in your repository (must be 512kb or less)
+# Do not change!
+yaml_version: 6
