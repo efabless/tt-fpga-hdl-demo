@@ -1,5 +1,11 @@
 \m5_TLV_version 1d: tl-x.org
 \m5
+
+   // *******************************************
+   // * For ChipCraft Course                    *
+   // * Replace this file with your own design. *
+   // *******************************************
+
    use(m5-1.0)
    var(target, ASIC)   /// Note, the FPGA CI flow will set this to FPGA.
 \SV
