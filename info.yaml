@@ -8,7 +8,7 @@ project:
   author:       "TBD"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "TBD"      # One line description of what your project does
-  language:     "Verilog" # other examples include SystemVerilog, TL-Verilog, Amaranth, VHDL, etc
+  language:     "SystemVerilog" # other examples include SystemVerilog, TL-Verilog, Amaranth, VHDL, etc
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
@@ -20,7 +20,7 @@ project:
   # List your project's Verilog source files here. (For TL-Verilog (.tlv) sources, list the corresponding (.v) generated Verilog files (which should not be committed to the repo).)
   # Verilog/TL-Verilog source files must be in ./src and you must list each Verilog source file separately, one per line:
   source_files:        
-    - "project.v"
+    - "project.sv"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:

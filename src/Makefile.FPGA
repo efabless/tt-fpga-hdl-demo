@@ -4,7 +4,7 @@ PROJECT = bitstream
 
 TOPCELL = tt_um_example
 PIN_DEF = tt3_asic_sim.pcf
-SOURCES = project.v
+SOURCES = project.sv
 
 DEVICE = up5k
 PACKAGE = sg48

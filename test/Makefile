@@ -5,7 +5,7 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR := $(realpath $(PWD)/../src)
-PROJECT_SOURCES = project.v
+PROJECT_SOURCES = project.sv
 
 ifneq ($(GATES),yes)
 
@@ -48,8 +48,8 @@ endif
 #-------------------
 # For TL-Verilog.
 
-# Verilog from TL-Verilog, including installation of SandPiper-SaaS.
-$(SRC_DIR)/%.v: $(SRC_DIR)/%.tlv
+# SystemVerilog from TL-Verilog, including installation of SandPiper-SaaS.
+$(SRC_DIR)/%.sv: $(SRC_DIR)/%.tlv
 	@pip show sandpiper-saas > /dev/null || (echo "Installing sandpiper-saas..." && pip install sandpiper-saas && touch ~/.makerchip_accepted)
 	@pip show sandpiper-saas > /dev/null || (echo "Failed to install sandpiper-saas, please install manually." && exit 1)
 	cd $(SRC_DIR) && sandpiper-saas -i '$(<F)' -o '$(@F)' --outdir . --inlineGen --noDirectiveComments --noline --clkAlways --bestsv --debugSigsYosys --iArgs

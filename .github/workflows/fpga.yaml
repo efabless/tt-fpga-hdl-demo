@@ -41,7 +41,9 @@ jobs:
         run: |
           cd src
           # Configure source file for FPGA build
-          sed -i 's/ASIC/FPGA/' project.tlv
+          if [ -f project.tlv ]; then
+            sed -i 's/ASIC/FPGA/' project.tlv
+          fi
           (cd ../test && make verilog)
           # sed -i '/uio_/d' tt_um_wokwi_*.v
           make -f Makefile.FPGA
