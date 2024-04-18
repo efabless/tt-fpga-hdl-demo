@@ -52,4 +52,4 @@ jobs:
           name: bitstream
           path: |
             src/bitstream.bin
-            src/tt_um_wokwi_*.v
+            src/*.v
