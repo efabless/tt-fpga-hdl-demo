@@ -6,7 +6,7 @@ on:
 
 jobs:
   docs:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -20,4 +20,4 @@ jobs:
           make verilog
 
       - name: Build docs
-        uses: TinyTapeout/tt-gds-action/docs@tt06
+        uses: TinyTapeout/tt-gds-action/docs@tt10

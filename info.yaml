@@ -1,14 +1,14 @@
 # Tiny Tapeout project information
 project:
 
-  # If using an HDL, set wokwi_id as 0 and uncomment and list your source files here. 
-  wokwi_id:     111111111111111111        # If using wokwi, set this to your project's ID
+  # If using a Wokwi, set wokwi_id as the ID number found in your Wokwi project URL.
+  wokwi_id:     0        # If using wokwi, set this to your project's ID
   
   title:        "TBD"      # Project title
   author:       "TBD"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "TBD"      # One line description of what your project does
-  language:     "SystemVerilog" # other examples include SystemVerilog, TL-Verilog, Amaranth, VHDL, etc
+  language:     "TL-Verilog" # other examples include Verilog, SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
@@ -17,9 +17,11 @@ project:
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
   top_module:  "tt_um_example"
   
-  # List your project's Verilog source files here. (For TL-Verilog (.tlv) sources, list the corresponding (.v) generated Verilog files (which should not be committed to the repo).)
+  # List your project's Verilog source files here.
+  # For TL-Verilog (.tlv) sources, list the corresponding (.v) generated Verilog files (which should not be committed to the repo).
   # Verilog/TL-Verilog source files must be in ./src and you must list each Verilog source file separately, one per line:
-  source_files:        
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  source_files:
     - "project.sv"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.

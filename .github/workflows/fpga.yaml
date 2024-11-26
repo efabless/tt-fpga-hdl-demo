@@ -2,56 +2,23 @@ name: fpga
 
 on:
   push:
+    # Comment out (or remove) the following line to run the FPGA workflow on every push:
+    #branches: none
   workflow_dispatch:
 
 jobs:
   fpga:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
         with:
           submodules: recursive
-
-      - name: Checkout tt-support-tools repo
-        uses: actions/checkout@v3
-        with:
-          repository: tinytapeout/tt-support-tools
-          path: tt
-          ref: tt05
-
-      - name: Setup python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-          cache: 'pip' # caching pip dependencies
-
-      - name: Install tt-support-tools dependencies
-        shell: bash
-        run: pip install -r tt/requirements.txt
-
-        # install oss fpga tools
-      - name: install oss-cad-suite
-        uses: YosysHQ/setup-oss-cad-suite@v2
-        with:
-          python-override: true
-
-      - name: build the bitstream
-        shell: bash
+      # Build Verilog if necessary from, e.g. TL-Verilog.
+      - name: Build Verilog
         run: |
-          cd src
-          # Configure source file for FPGA build
-          if [ -f project.tlv ]; then
-            sed -i 's/ASIC/FPGA/' project.tlv
-          fi
-          (cd ../test && make verilog)
-          # sed -i '/uio_/d' tt_um_wokwi_*.v
-          make -f Makefile.FPGA
+          cd test
+          make verilog
 
-      - name: Upload bitstream artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: bitstream
-          path: |
-            src/bitstream.bin
-            src/*.v
+      - name: FPGA bitstream for TT ASIC Sim (ICE40UP5K)
+        uses: TinyTapeout/tt-gds-action/fpga/ice40up5k@tt10
