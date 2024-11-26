@@ -27,34 +27,34 @@ project:
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  ui[0]: "TBD"
+  ui[1]: "TBD"
+  ui[2]: "TBD"
+  ui[3]: "TBD"
+  ui[4]: "TBD"
+  ui[5]: "TBD"
+  ui[6]: "TBD"
+  ui[7]: "TBD"
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "TBD"
+  uo[1]: "TBD"
+  uo[2]: "TBD"
+  uo[3]: "TBD"
+  uo[4]: "TBD"
+  uo[5]: "TBD"
+  uo[6]: "TBD"
+  uo[7]: "TBD"
 
   # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
-  uio[7]: ""
+  uio[0]: "TBD"
+  uio[1]: "TBD"
+  uio[2]: "TBD"
+  uio[3]: "TBD"
+  uio[4]: "TBD"
+  uio[5]: "TBD"
+  uio[6]: "TBD"
+  uio[7]: "TBD"
 
 # Do not change!
 yaml_version: 6
